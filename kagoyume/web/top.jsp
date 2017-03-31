@@ -6,6 +6,32 @@
 
 <%@page contentType="text/html" pageEncoding="Shift_JIS"%>
 <!DOCTYPE html>
+<%@page import="ec.itemDataBeans" 
+        import="ec.loginHelper"
+        import="ec.UserDataDTO"%>
+<%
+    loginHelper login = new loginHelper();
+    session = request.getSession();
+    boolean LogStat = false;
+    String loginName = ""; 
+//    if(session.getAttribute("LoginStat").equals("")
+//            || session.getAttribute("LoginStat").equals(null))
+    UserDataDTO user = (UserDataDTO)session.getAttribute("LoginUser");
+    
+    session.setAttribute("ac","top");
+    
+    //if(strLoginChk.equals(null) || strLoginChk.equals(""))
+    if(user == null)
+    {
+        LogStat = false;
+    }
+    else
+    {
+        LogStat = true;
+        loginName = user.getName();
+    }
+    
+%>
 <html>
     <head>
         <title>TODO supply a title</title>
@@ -21,6 +47,6 @@
         <br>
         <input type="submit" name="btnSubmit" value="åüçı">
         </form>
-    </body>
-
+    </body>Å@
+     <%=login.Login(LogStat,loginName,"top.jsp")%>
 </html>

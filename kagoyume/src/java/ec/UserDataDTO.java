@@ -12,60 +12,90 @@ import java.util.Date;
 public class UserDataDTO {
     private int userID;
     private String name;
-    private Date birthday;
-    private String tell;
-    private int type;
-    private String comment;
+    private String pass;
+    private String mail;
+    private String address;
+    private int total;
     private Timestamp newDate;
-    
-    
-    public int getUserID() {
+    private int  deleteFlg;
+    //ID
+    public int getUserID() 
+    {
         return userID;
     }
-    public void setUserID(int userID) {
+    public void setUserID(int userID) 
+    {
         this.userID = userID;
     }
     
-    public String getName(){
+    //Name
+    public String getName()
+    {
         return name;
     }
-    public void setName(String name){
-        this.name = name;
+    public void setName(String val)
+    {
+        this.name = val;
     }
     
-    public Date getBirthday(){
-        return birthday;
+    //Pass
+    public String getPass()
+    {
+        return pass;
     }
-    public void setBirthday(Date birthday){
-        this.birthday = birthday;
-    }
-    
-    public String getTell(){
-        return tell;
-    }
-    public void setTell(String tell){
-        this.tell = tell;
+    public void setPass(String val)
+    {
+        this.pass = val;
     }
     
-    public int getType(){
-        return type;
+    //Mail
+    public String getMail()
+    {
+        return mail;
     }
-    public void setType(int type){
-        this.type = type;
-    }
-    
-    public String getComment(){
-        return comment;
-    }
-    public void setComment(String comment){
-        this.comment = comment;
+    public void setMail(String val)
+    {
+        this.mail = val;
     }
     
-    public Timestamp getNewDate() {
+    //Adress
+    public String getAddress()
+    {
+        return address;
+    }
+    public void setAddress(String val)
+    {
+        this.address = val;
+    } 
+    
+    //total
+    public int getTotal()
+    {
+        return total;
+    }
+    public void setTotal(int val)
+    {
+        this.total = val;
+    }
+    
+    //newDate
+    public Timestamp getNewDate()
+    {
         return newDate;
     }
-    public void setNewDate(Timestamp newDate) {
+    public void setNewDate(Timestamp newDate)
+    {
         this.newDate = newDate;
+    }
+    
+    //deleteFlg
+    public int getDeleteFlg()
+    {
+        return deleteFlg;
+    }
+    public void setDeleteFlg(int val)
+    {
+        this.deleteFlg = val;
     }
 
 }

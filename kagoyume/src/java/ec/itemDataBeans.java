@@ -113,10 +113,7 @@ public class itemDataBeans implements Serializable
         }
     }
     
-    public int getItemCnt()
-    {
-        return this.name.size();
-    }
+
     
     public String getProductID(int index) 
     {
@@ -136,7 +133,6 @@ public class itemDataBeans implements Serializable
         }
     }
      
-    
     public Integer getPoint(int index) 
     {
         return point.get(index);
@@ -235,5 +231,44 @@ public class itemDataBeans implements Serializable
         {
             this.condition.add(i_condition);
         }
+    }
+    
+    //商品の数を取得
+    public int getItemCnt()
+    {
+        return this.name.size();
+    }
+    
+    //商品の合計金額を取得
+    public int getTotalPrice()
+    {
+        
+        int sum = 0;       //合計金額
+        if(getItemCnt() > 0)
+        {
+            //合計金額の計算
+            for(int i = 0; i < getItemCnt() ;i++)
+            {
+                //写真　商品名（リンク付き　）金額を表示
+                sum += getPrice(i);
+            }
+        }
+        return sum;
+    }
+    
+    public void deleteItem(int Index)
+    {
+        this.name.remove(Index);
+        this.price.remove(Index);
+        this.ImageURL.remove(Index);
+        this.productID.remove(Index);
+        
+//        this.point.remove(Index);
+//        this.maker.remove(Index);
+//        this.review.remove(Index);
+//        this.overView.remove(Index);
+//        this.stock.remove(Index);
+//        this.condition.remove(Index);
+        
     }
 }

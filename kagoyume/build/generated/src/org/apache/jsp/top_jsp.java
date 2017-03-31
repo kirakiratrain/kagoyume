@@ -3,6 +3,9 @@ package org.apache.jsp;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
+import ec.itemDataBeans;
+import ec.loginHelper;
+import ec.UserDataDTO;
 
 public final class top_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
@@ -45,6 +48,31 @@ public final class top_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("\n");
       out.write("<!DOCTYPE html>\n");
+      out.write("\n");
+
+    loginHelper login = new loginHelper();
+    session = request.getSession();
+    boolean LogStat = false;
+    String loginName = ""; 
+//    if(session.getAttribute("LoginStat").equals("")
+//            || session.getAttribute("LoginStat").equals(null))
+    UserDataDTO user = (UserDataDTO)session.getAttribute("LoginUser");
+    
+    session.setAttribute("ac","top");
+    
+    //if(strLoginChk.equals(null) || strLoginChk.equals(""))
+    if(user == null)
+    {
+        LogStat = false;
+    }
+    else
+    {
+        LogStat = true;
+        loginName = user.getName();
+    }
+    
+
+      out.write("\n");
       out.write("<html>\n");
       out.write("    <head>\n");
       out.write("        <title>TODO supply a title</title>\n");
@@ -60,7 +88,9 @@ public final class top_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <br>\n");
       out.write("        <input type=\"submit\" name=\"btnSubmit\" value=\"åüçı\">\n");
       out.write("        </form>\n");
-      out.write("    </body>\n");
+      out.write("    </body>Å@\n");
+      out.write("     ");
+      out.print(login.Login(LogStat,loginName,"top.jsp"));
       out.write("\n");
       out.write("</html>");
     } catch (Throwable t) {

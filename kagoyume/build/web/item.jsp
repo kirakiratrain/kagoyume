@@ -13,17 +13,34 @@
 <%@page contentType="text/html" pageEncoding="Shift_JIS"%>
 <!DOCTYPE html>
 <%@page import="ec.itemDataBeans" 
-        import="ec.ecHelper"%>
+        import="ec.ecHelper"
+        import="ec.loginHelper"
+        import="ec.UserDataDTO"%>
 <%
     //topへのリンク
     ecHelper jumptop = ecHelper.getInstance();
+    
     //検索データ
     session = request.getSession();
     itemDataBeans iDB = (itemDataBeans)session.getAttribute("searchData");
     //検索結果画面で選択したIndexを取得
     String strIndex = (String)request.getAttribute("ItemIndex");
     int index = Integer.parseInt(strIndex);
-    //itemDataBeans.Review rev = iDB.getReview(index); 
+
+    //ログインへのリンク
+    loginHelper login = new loginHelper();     
+    boolean LogStat = false;
+    String loginName = ""; 
+    UserDataDTO user = (UserDataDTO)session.getAttribute("LoginUser");
+    if(user == null)
+    {
+        LogStat = false;
+    }
+    else
+    {
+        LogStat = true;
+        loginName = user.getName();
+    }
 %>
 
 <html>
@@ -71,4 +88,5 @@
         </form>
     </body>
     <%=jumptop.home()%>
+    <%=login.Login(LogStat,loginName,"top.jsp")%>
 </html>

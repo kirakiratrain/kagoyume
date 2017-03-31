@@ -35,13 +35,16 @@ public class item extends HttpServlet
         response.setContentType("text/html;charset=UTF-8");
         
         HttpSession session = request.getSession();
-        session.setAttribute("ac", "item");
-        String itemIndex = (String)request.getParameter("ItemIndex");
         
+        
+        
+        session.setAttribute("ac", "item");
+        
+        //表示ページを書き込む
+        String itemIndex = (String)request.getParameter("ItemIndex");
         
         //item.jspへIndexデータを教える
         request.setAttribute("ItemIndex", itemIndex);
-        
         
         request.getRequestDispatcher("/item.jsp").forward(request, response);
     }

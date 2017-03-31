@@ -17,7 +17,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Choir
  */
-public class cart extends HttpServlet {
+public class cart extends HttpServlet 
+{
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,30 +34,37 @@ public class cart extends HttpServlet {
     {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
+        session.setAttribute("ac","cart");
+        
         try 
         {
              itemDataBeans iDB = (itemDataBeans)session.getAttribute("cartData");
-             int sum = 0;       //合計金額
-             if(iDB.getItemCnt() > 0)
+             int sum = 0;
+             if(iDB != null)
              {
-                 //合計金額の計算
-                 for(int i = 0; i < iDB.getItemCnt() ;i++)
-                 {
-                     //写真　商品名（リンク付き　）金額を表示
-                     sum += iDB.getPrice(i);
-                 }
+                if(iDB.getItemCnt() > 0)
+                {
+                    //合計金額の計算
+                    for(int i = 0; i < iDB.getItemCnt() ;i++)
+                    {
+                        //写真　商品名（リンク付き　）金額を表示
+                        sum += iDB.getPrice(i);
+                    }
+                }
+                else
+                {
+
+                }
              }
-             else
-             {
-                 
-             }
-             
-             request.setAttribute("sum", sum);
              request.getRequestDispatcher("/cart.jsp").forward(request, response);
         }
         catch(Exception e)
         {
-                    
+            //ログイン失敗
+            String msg = "不正アクセスです<br>";
+                
+            session.setAttribute("ErrStat",msg);
+            request.getRequestDispatcher("/err.jsp").forward(request, response);
         }
     }
 

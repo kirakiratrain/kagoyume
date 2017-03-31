@@ -43,25 +43,30 @@ public class add extends HttpServlet {
             {
                 throw new Exception("不正なアクセスです");
             }
-
+            
+            itemDataBeans cartData = (itemDataBeans)session.getAttribute("cartData");
+            
+            if(cartData == null)
+            {
+                //検索データをセッションに保存　次の検索時に廃棄される。またはtop画面に戻った際
+                cartData = new itemDataBeans();
+            }
+            
             //Indexを取得
             String strIndex = request.getParameter("Index");
             int index = Integer.parseInt(strIndex);
 
-            //検索データをセッションに保存　次の検索時に廃棄される。またはtop画面に戻った際
-            itemDataBeans cartData = new itemDataBeans();
             itemDataBeans iDB = (itemDataBeans)session.getAttribute("searchData");
             cartData.setName(iDB.getName(index));   //製品名
             cartData.setPrice(iDB.getPrice(index));   //価格
             cartData.setImageURL(iDB.getImageURL(index));   //画像URL
-    //        cartData.setPoint(iDB.getPoint(index));   //ポイント
-    //        cartData.setOverView(iDB.getOverView(index));   //概要
-    //        cartData.setProductID(iDB.getProductID(index));   //商品ID
-
-            String Test = cartData.getName(0);
-
+            //cartData.setPoint(iDB.getPoint(index));   //ポイント
+            //cartData.setOverView(iDB.getOverView(index));   //概要
+            cartData.setProductID(iDB.getProductID(index));   //商品ID
+            
+            
             session.setAttribute("cartData",cartData);
-
+            
             request.getRequestDispatcher("/add.jsp").forward(request, response);
         }
         catch(Exception e)

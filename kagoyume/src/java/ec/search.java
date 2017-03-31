@@ -21,7 +21,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Choir
  */
-public class search extends HttpServlet {
+public class search extends HttpServlet 
+{
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,8 +42,15 @@ public class search extends HttpServlet {
         
         //セッションスタート
         HttpSession session = request.getSession();
+        
+        
         try
         {
+            //不正アクセス　再表示防止
+            if(!session.getAttribute("ac").equals("top"))
+            {
+                throw new Exception("不正なアクセスです");
+            }
             
             //画面ステータスの設定
             if(word.equals(null) || word.equals(""))

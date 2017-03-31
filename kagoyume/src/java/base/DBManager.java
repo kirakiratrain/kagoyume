@@ -15,7 +15,7 @@ public class DBManager {
             Class.forName("com.mysql.jdbc.Driver");
             //con = DriverManager.getConnection("jdbc:mysql://localhost:3306/challenge_db","root","");
             //ä¿®æ­£ç®?æ‰?1
-            con = DriverManager.getConnection("jdbc:mysql://localhost:8889/Challenge_db","root","root");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:8889/kagoyume_db","root","root");
             System.out.println("DBConnected!!");
             return con;
         }
