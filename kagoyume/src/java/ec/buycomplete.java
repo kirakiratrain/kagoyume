@@ -50,6 +50,7 @@ public class buycomplete extends HttpServlet
             {
                 throw new Exception("不正なアクセスです");
             }
+            
             // * 総購入金額を更新 DB user_t
 
             //１カートのデータをセッションから取得

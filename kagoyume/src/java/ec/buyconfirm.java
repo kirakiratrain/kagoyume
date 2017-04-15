@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -39,8 +40,22 @@ public class buyconfirm extends HttpServlet
             throws ServletException, IOException 
     {
         response.setContentType("text/html;charset=UTF-8");
-        //不正リンクの防止処理
-        
+        HttpSession session = request.getSession();
+        try
+        {
+            //不正リンクの防止処理
+            if(!session.getAttribute("ac").equals("cart"))
+            {
+                throw new Exception("不正なアクセスです");
+            }
+            session.setAttribute("ac","buyconfirm");
+        }
+        catch(Exception e)
+        {
+            //ログイン失敗
+            session.setAttribute("ErrStat",e.getMessage());
+            request.getRequestDispatcher("/err.jsp").forward(request, response);
+        }
         
         request.getRequestDispatcher("/buyconfirm.jsp").forward(request, response);
     }
